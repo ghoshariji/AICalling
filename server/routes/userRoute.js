@@ -11,7 +11,7 @@ const authMiddleware = require("../middlewares/authMiddleware");
 
 router.post("/signup", async (req, res) => {
   const { name, email, password, phone } = req.body;
-
+console.log(req.body)
   try {
     const userExists = await User.findOne({ email });
     if (userExists) {
@@ -55,6 +55,23 @@ router.post("/login", async (req, res) => {
     console.error(err);
     return res.status(500).json({ message: "Server Error" + err });
   }
+});
+
+router.get("/validate", (req, res) => {
+  const token = req.headers.authorization?.split(" ")[1]; // Get the token from the Authorization header
+
+  console.log(token)
+  if (!token) {
+    return res.status(401).json({ valid: false, message: "No token provided" });
+  }
+
+  jwt.verify(token, JWT_SECRET, (err) => {
+    if (err) {
+      return res.status(401).json({ valid: false, message: "Invalid token" });
+    }
+    console.log('Come')
+    return res.status(200).json({ valid: true });
+  });
 });
 
 router.get("/home", authMiddleware, (req, res) => {
