@@ -167,7 +167,7 @@
               class="dropdown-menu dropdown-menu-end"
               aria-labelledby="profileDropdown"
             >
-              <li><a class="dropdown-item" href="#">Log Out</a></li>
+              <li><a class="dropdown-item" href="#" id="logout-btn">Log Out</a></li>
             </ul>
           </div>
         </header>
@@ -370,12 +370,7 @@
       const logoutBtn = document.getElementById("logout-btn");
 
       logoutBtn.addEventListener("click", () => {
-        // Remove the JWT token from localStorage
-        console.log("click");
         localStorage.removeItem("token");
-
-        // Redirect the user to the login page
-
         window.location.href = "login.html";
       });
 
