@@ -60,7 +60,7 @@ router.post("/login", async (req, res) => {
 router.get("/validate", (req, res) => {
   const token = req.headers.authorization?.split(" ")[1]; // Get the token from the Authorization header
 
-  console.log(token)
+
   if (!token) {
     return res.status(401).json({ valid: false, message: "No token provided" });
   }
@@ -69,7 +69,7 @@ router.get("/validate", (req, res) => {
     if (err) {
       return res.status(401).json({ valid: false, message: "Invalid token" });
     }
-    console.log('Come')
+  
     return res.status(200).json({ valid: true });
   });
 });

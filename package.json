@@ -18,7 +18,7 @@
     "express": "^4.21.0",
     "googleapis": "^144.0.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^5.13.22",
+    "mongoose": "^8.7.0",
     "openai": "^4.55.7",
     "serverr": "^1.0.0",
     "twilio": "^5.2.2"
