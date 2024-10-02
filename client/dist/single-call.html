@@ -174,7 +174,68 @@
                               rows="3"
                             ></textarea>
                           </div>
-                          <div class="col-sm-12 d-flex justify-content-end">
+                          <select class="form-control" id="language">
+                            <option value="">Select Language</option>
+                            <option value="bg">Bulgarian</option>
+                            <option value="ca">Catalan</option>
+                            <option value="cs">Czech</option>
+                            <option value="da">Danish</option>
+                            <option value="da-DK">Danish (Denmark)</option>
+                            <option value="de">German</option>
+                            <option value="de-CH">German (Switzerland)</option>
+                            <option value="el">Greek</option>
+                            <option value="en">English</option>
+                            <option value="en-AU">English (Australia)</option>
+                            <option value="en-GB">English (UK)</option>
+                            <option value="en-IN">English (India)</option>
+                            <option value="en-NZ">English (New Zealand)</option>
+                            <option value="en-US">English (US)</option>
+                            <option value="es">Spanish</option>
+                            <option value="es-419">Spanish (Latin America)</option>
+                            <option value="es-LATAM">Spanish (LATAM)</option>
+                            <option value="et">Estonian</option>
+                            <option value="fi">Finnish</option>
+                            <option value="fr">French</option>
+                            <option value="fr-CA">French (Canada)</option>
+                            <option value="hi">Hindi</option>
+                            <option value="hi-Latn">Hindi (Latin)</option>
+                            <option value="hu">Hungarian</option>
+                            <option value="id">Indonesian</option>
+                            <option value="it">Italian</option>
+                            <option value="ja">Japanese</option>
+                            <option value="ko">Korean</option>
+                            <option value="ko-KR">Korean (South Korea)</option>
+                            <option value="lt">Lithuanian</option>
+                            <option value="lv">Latvian</option>
+                            <option value="ms">Malay</option>
+                            <option value="multi">Multiple Languages</option>
+                            <option value="nl">Dutch</option>
+                            <option value="nl-BE">Dutch (Belgium)</option>
+                            <option value="no">Norwegian</option>
+                            <option value="pl">Polish</option>
+                            <option value="pt">Portuguese</option>
+                            <option value="pt-BR">Portuguese (Brazil)</option>
+                            <option value="ro">Romanian</option>
+                            <option value="ru">Russian</option>
+                            <option value="sk">Slovak</option>
+                            <option value="sv">Swedish</option>
+                            <option value="sv-SE">Swedish (Sweden)</option>
+                            <option value="ta">Tamil</option>
+                            <option value="taq">Tamasheq</option>
+                            <option value="th">Thai</option>
+                            <option value="th-TH">Thai (Thailand)</option>
+                            <option value="tr">Turkish</option>
+                            <option value="uk">Ukrainian</option>
+                            <option value="vi">Vietnamese</option>
+                            <option value="zh">Chinese</option>
+                            <option value="zh-CN">Chinese (Simplified)</option>
+                            <option value="zh-Hans">Chinese (Simplified Han)</option>
+                            <option value="zh-Hant">Chinese (Traditional Han)</option>
+                            <option value="zh-TW">Chinese (Taiwan)</option>
+                          </select>
+                          
+                          
+                          <div class="col-sm-12 d-flex justify-content-end mt-3">
                             <button
                               type="submit"
                               class="btn btn-primary me-1 mb-1"
@@ -215,8 +276,16 @@
       e.preventDefault();
       const firstName = document.getElementById("first-name").value;
       const phoneNumberInput = document.getElementById("phone-number").value;
+      const selectedLanguage = document.getElementById("language").value;
+      console.log(selectedLanguage)
       const prompt = document.getElementById("prompt").value;
-
+      if(selectedLanguage == "")
+    {
+      Swal.fire({icon: "error",
+          text: "Please select a language First"
+    })
+    return;
+    }
       // Validate and format the phone number
       const formattedPhoneNumber = formatPhoneNumber(phoneNumberInput);
 
@@ -245,7 +314,7 @@
             transcriber: {
               provider: "deepgram",
               model: "nova-2",
-              language: "en-AU",
+              language: selectedLanguage,
               smartFormat: false,
             },
             model: {
