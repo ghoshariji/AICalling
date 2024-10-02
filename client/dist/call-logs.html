@@ -109,9 +109,11 @@
         </div>
         <div id="main">
             <header class="dashboard-header d-flex align-items-center justify-content-between px-3 py-2">
+            <header class="dashboard-header d-flex align-items-center justify-content-between px-3 py-2">
                 <a href="#" class="burger-btn d-block d-xl-none">
                   <i class="bi bi-justify fs-3"></i>
                 </a>
+              
               
                 <!-- Profile Image and Dropdown Container -->
                 <div class="dropdown d-flex ms-auto">
@@ -186,6 +188,19 @@
     <script src="assets/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
+
+const logoutBtn = document.getElementById("logout-btn");
+      
+
+      logoutBtn.addEventListener("click", () => {
+        // Remove the JWT token from localStorage
+        console.log("click");
+        localStorage.removeItem("token");
+
+        // Redirect the user to the login page
+      
+        window.location.href = "login.html";
+      });
 
 async function validateToken() {
         const token = localStorage.getItem("token");

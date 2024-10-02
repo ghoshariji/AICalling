@@ -184,6 +184,18 @@
     <script src="assets/js/main.js"></script>
 
     <script>
+       const logoutBtn = document.getElementById("logout-btn");
+      
+
+      logoutBtn.addEventListener("click", () => {
+        // Remove the JWT token from localStorage
+        console.log("click");
+        localStorage.removeItem("token");
+
+        // Redirect the user to the login page
+      
+        window.location.href = "login.html";
+      });
         document.addEventListener('DOMContentLoaded', () => {
             fetch('http://127.0.0.1:3000/imf/call-logs')
                 .then(response => {
