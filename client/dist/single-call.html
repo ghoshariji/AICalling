@@ -126,13 +126,11 @@
       </div>
     </div>
     <div id="main">
-      <header class="mb-3 dashboard-header">
+      <header class="dashboard-header d-flex align-items-center justify-content-between px-3 py-2">
         <a href="#" class="burger-btn d-block d-xl-none">
           <i class="bi bi-justify fs-3"></i>
         </a>
-
-        <!-- Profile Image and Dropdown Container -->
-        <div class="dropdown">
+        <div class="dropdown profile-dropdown">
           <img
             src="./assets/images/faces/profile-pic.jpg"
             alt="Profile"
@@ -141,15 +139,17 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           />
-          <ul
-            class="dropdown-menu dropdown-menu-end"
-            aria-labelledby="profileDropdown"
-          >
-          
-            <li><a class="dropdown-item" href="#">Log Out</a></li>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+            <li>
+              <a class="dropdown-item" href="#" id="logout-btn">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Logout</span>
+              </a>
+            </li>
           </ul>
         </div>
       </header>
+      
 
       <div class="page-heading">
         <div class="page-title">
@@ -317,6 +317,62 @@
   <!-- Include SweetAlert2 JS -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
+    
+
+const logoutBtn = document.getElementById("logout-btn");
+      
+
+      logoutBtn.addEventListener("click", () => {
+        // Remove the JWT token from localStorage
+        console.log("click");
+        localStorage.removeItem("token");
+
+        // Redirect the user to the login page
+      
+        window.location.href = "login.html";
+      });
+
+
+async function validateToken() {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+          // If no token, redirect to login page
+          window.location.href = "login.html";
+          return;
+        }
+
+        try {
+          const response = await fetch(
+            "http://localhost:3000/api/auth/validate",
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("Token validation failed");
+          }
+
+          const data = await response.json();
+          if (!data.valid) {
+            // If token is not valid, redirect to login page
+            window.location.href = "login.html";
+          }
+        } catch (error) {
+          console.error("Error validating token:", error);
+          // Redirect to login if there's an error
+          window.location.href = "login.html";
+        }
+      }
+
+      // Call the validateToken function when the page loads
+      window.onload = validateToken;
+
     document.getElementById("call-form").addEventListener("submit", (e) => {
       e.preventDefault();
       const firstName = document.getElementById("first-name").value;

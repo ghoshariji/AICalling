@@ -120,13 +120,13 @@
         </div>
       </div>
       <div id="main">
-        <header class="mb-3 dashboard-header">
+        <header class="dashboard-header d-flex align-items-center justify-content-between px-3 py-2">
           <a href="#" class="burger-btn d-block d-xl-none">
             <i class="bi bi-justify fs-3"></i>
           </a>
-  
+        
           <!-- Profile Image and Dropdown Container -->
-          <div class="dropdown">
+          <div class="dropdown profile-dropdown">
             <img
               src="./assets/images/faces/profile-pic.jpg"
               alt="Profile"
@@ -135,12 +135,13 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             />
-            <ul
-              class="dropdown-menu dropdown-menu-end"
-              aria-labelledby="profileDropdown"
-            >
-            
-              <li><a class="dropdown-item" href="#">Log Out</a></li>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+              <li>
+                <a class="dropdown-item" href="#" id="logout-btn">
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Logout</span>
+                </a>
+              </li>
             </ul>
           </div>
         </header>
@@ -238,6 +239,18 @@
 
     <!-- Ensure JavaScript containing processBulkCalls function loads properly -->
     <script>
+       const logoutBtn = document.getElementById("logout-btn");
+      
+
+      logoutBtn.addEventListener("click", () => {
+        // Remove the JWT token from localStorage
+        console.log("click");
+        localStorage.removeItem("token");
+
+        // Redirect the user to the login page
+      
+        window.location.href = "login.html";
+      });
 
 async function validateToken() {
         const token = localStorage.getItem("token");
