@@ -252,26 +252,26 @@
 
         window.location.href = "login.html";
       });
-      document.addEventListener("DOMContentLoaded", () => {
-        fetch("http://127.0.0.1:3000/imf/call-logs")
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Network response was not ok");
-            }
-            return response.json();
-          })
-          .then((data) => {
-            console.log(data); // Check the structure of data
-            const tableBody = document.querySelector("#call-logs-table tbody");
-            tableBody.innerHTML = ""; // Clear existing rows
-
-            data.forEach((log) => {
-              // Access properties according to the data structure
-              const row = document.createElement("tr");
-              row.innerHTML = `
-                            <td>${log.extractedInfo.name || "N/A"}</td>
-                            <td>${log.extractedInfo.phone || "N/A"}</td>
-                            <td>${log.extractedInfo.email || "N/A"}</td>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('https://aicalling-osdb.onrender.com/imf/call-logs')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data); // Check the structure of data
+                    const tableBody = document.querySelector('#call-logs-table tbody');
+                    tableBody.innerHTML = ''; // Clear existing rows
+        
+                    data.forEach(log => {
+                        // Access properties according to the data structure
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${log.extractedInfo.name || 'N/A'}</td>
+                            <td>${log.extractedInfo.phone || 'N/A'}</td>
+                            <td>${log.extractedInfo.email || 'N/A'}</td>
                         `;
               tableBody.appendChild(row);
             });
@@ -292,7 +292,7 @@
 
         try {
           const response = await fetch(
-            "http://localhost:3000/api/auth/validate",
+            "https://aicalling-osdb.onrender.com/api/auth/validate",
             {
               method: "GET",
               headers: {
