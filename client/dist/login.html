@@ -15,6 +15,7 @@
       crossorigin="anonymous"
     ></script>
   </head>
+  
   <body>
     <div class="container">
       <div class="forms-container">
@@ -36,7 +37,7 @@
               <i class="fas fa-lock"></i>
               <input
                 type="password"
-                id="password"
+                id="loginPassword"
                 placeholder="Password"
                 required
               />
@@ -88,7 +89,7 @@
               <i class="fas fa-lock"></i>
               <input
                 type="password"
-                id="loginPassword"
+                id="password"
                 placeholder="Password"
                 required
               />
@@ -192,8 +193,10 @@
           event.preventDefault();
           const email = document.getElementById("loginEmail").value;
           const password = document.getElementById("loginPassword").value;
+      const res = await fetch("https://aicalling-osdb.onrender.com/api/auth/login", {
 
-        const res = await fetch("https://aicalling-osdb.onrender.com/api/auth/login", {
+        // const res = await fetch("http://localhost:3000/api/auth/login", {
+        
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password }),
