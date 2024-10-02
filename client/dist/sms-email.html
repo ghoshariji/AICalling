@@ -198,7 +198,7 @@
         window.location.href = "login.html";
       });
         document.addEventListener('DOMContentLoaded', () => {
-            fetch('http://127.0.0.1:3000/imf/call-logs')
+            fetch('https://aicalling-osdb.onrender.com/imf/call-logs')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
@@ -237,7 +237,7 @@
 
         try {
           const response = await fetch(
-            "http://localhost:3000/api/auth/validate",
+            "https://aicalling-osdb.onrender.com/api/auth/validate",
             {
               method: "GET",
               headers: {
